@@ -72,3 +72,54 @@ We create:
 OffEff_Diff = 115 - 105 = +10
 DefEff_Diff = 95 - 100 = -5
 Seed_Diff   = 3 - 10   = -7
+
+Target:
+
+```text
+1 if Team A won
+0 if Team B won
+
+The model learns how differences in efficiency, defense, and seed translate into win probability.
+
+# Mathematical Intuition
+
+If:
+
+Strength_A = 85
+Strength_B = 78
+
+We model:
+
+P(A beats B) = sigmoid(Strength_A - Strength_B)
+
+This difference modeling is the core idea of pairwise learning.
+
+Why Difference Features Work Well
+
+Using:
+
+Feature_A - Feature_B
+
+Instead of raw values:
+
+Captures relative strength
+
+Removes scale bias
+
+Improves generalization
+
+Makes the model symmetric
+
+Avoiding Bias (Important Trick)
+
+If we always assign:
+
+Team1 = lower TeamID
+
+Team2 = higher TeamID
+
+The model may learn artificial ordering bias.
+
+To prevent this:
+
+
